@@ -183,27 +183,27 @@
                 0 0 120px rgba(29, 158, 117, 0.3),
                 inset -30px -30px 60px rgba(0, 0, 0, 0.3),
                 inset 30px 30px 60px rgba(255, 255, 255, 0.1);
-            animation: breathe 11s infinite ease-in-out;
+            animation: breathe 19s infinite ease-in-out;
             filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
         }
 
         @keyframes breathe {
+            /* Expande lentamente al inicio */
             0% {
                 transform: scale(0.7);
                 opacity: 0.4;
             }
-            25% {
+            /* Punto máximo de expansión (aproximadamente en el medio de inhalación + mantención) */
+            35% {
                 transform: scale(1.5);
                 opacity: 0.95;
             }
-            50% {
-                transform: scale(1);
-                opacity: 1;
+            /* Se mantiene expandido durante la mantención */
+            65% {
+                transform: scale(1.5);
+                opacity: 0.95;
             }
-            75% {
-                transform: scale(0.8);
-                opacity: 0.6;
-            }
+            /* Contrae lentamente en la exhalación */
             100% {
                 transform: scale(0.7);
                 opacity: 0.4;
@@ -664,8 +664,18 @@
             soundToggle: document.getElementById('soundToggle')
         };
 
-        // ========== AUDIO ==========
-        function initAudio() {
+        // ========== ACTUALIZAR ANIMACIÓN ==========
+        function updateBreathingAnimation() {
+            const totalTime = technique.inhale + technique.hold + technique.exhale + 1;
+            const breathingCircle = document.querySelector('.breathing-circle');
+            
+            // Cambiar solo la duración de la animación
+            breathingCircle.style.animationDuration = totalTime + 's';
+            
+            // Actualizar también el pulso del borde
+            const breathingArea = document.querySelector('.breathing-area');
+            breathingArea.style.setProperty('--animation-duration', totalTime + 's');
+        }
             if (!audioContext) {
                 audioContext = new (window.AudioContext || window.webkitAudioContext)();
             }
@@ -800,6 +810,7 @@
             elements.tech55.classList.remove('active');
             elements.tech44.classList.remove('active');
             updatePhaseDisplay();
+            updateBreathingAnimation();
         });
 
         // Técnica 5-5
@@ -809,6 +820,7 @@
             elements.tech48.classList.remove('active');
             elements.tech44.classList.remove('active');
             updatePhaseDisplay();
+            updateBreathingAnimation();
         });
 
         // Técnica Box 4-4 (Cuadrada)
@@ -818,6 +830,7 @@
             elements.tech48.classList.remove('active');
             elements.tech55.classList.remove('active');
             updatePhaseDisplay();
+            updateBreathingAnimation();
         });
 
         // Toggle sonido
@@ -828,6 +841,7 @@
 
         // Inicialización
         updatePhaseDisplay();
+        updateBreathingAnimation();
     </script>
 </body>
 </html>
