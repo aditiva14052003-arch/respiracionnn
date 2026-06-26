@@ -14,7 +14,9 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a3e 50%, #0f2e4d 100%);
+            background: linear-gradient(135deg, #0a0e1f 0%, #0f1835 25%, #0d1f3f 50%, #0a1a2e 75%, #0a0e1f 100%);
+            background-size: 400% 400%;
+            animation: gradientFlow 20s ease infinite;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -22,6 +24,12 @@
             padding: 20px;
             position: relative;
             overflow-x: hidden;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* Fondo animado con gradiente */
@@ -74,14 +82,15 @@
         .container {
             max-width: 700px;
             width: 100%;
-            background: rgba(20, 25, 45, 0.8);
-            backdrop-filter: blur(20px);
-            border-radius: 30px;
+            background: rgba(20, 25, 45, 0.85);
+            backdrop-filter: blur(25px);
+            border-radius: 40px;
             padding: 3rem 2rem;
             box-shadow: 
                 0 8px 32px rgba(31, 38, 135, 0.37),
-                inset 0 0 60px rgba(29, 158, 117, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+                inset 0 0 80px rgba(29, 158, 117, 0.08),
+                0 0 60px rgba(29, 158, 117, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             position: relative;
             z-index: 1;
         }
@@ -93,9 +102,20 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(29, 158, 117, 0.5), transparent);
-            border-radius: 30px 30px 0 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(29, 158, 117, 0.6), transparent);
+            border-radius: 40px 40px 0 0;
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(74, 144, 226, 0.4), transparent);
+            border-radius: 0 0 40px 40px;
         }
 
         .header {
@@ -283,6 +303,91 @@
             background-clip: text;
         }
 
+        .affirmation {
+            display: block;
+            font-size: 14px;
+            margin-top: 2.5rem;
+            opacity: 0.85;
+            font-weight: 300;
+            letter-spacing: 1px;
+            font-style: italic;
+            animation: fadeInOut 11s infinite ease-in-out;
+            position: relative;
+            z-index: 20;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.95; }
+        }
+
+        /* FRASES INSPIRACIONALES */
+        .inspirational-quote {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            margin-top: 1.5rem;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            animation: fadeQuote 6s ease-in-out infinite;
+            line-height: 1.6;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes fadeQuote {
+            0%, 10% { opacity: 0; }
+            20%, 80% { opacity: 0.7; }
+            90%, 100% { opacity: 0; }
+        }
+
+        /* EFECTO DE ONDAS DE LUZ */
+        .wave-bg {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: url('data:image/svg+xml,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,64L100,69.3C200,75,400,85,600,85.3C800,85,1000,75,1100,69.3L1200,64L1200,120L1100,120C1000,120,800,120,600,120C400,120,200,120,100,120L0,120Z" fill="rgba(29,158,117,0.05)" fill-opacity="1"></path></svg>') repeat-x;
+            background-size: 1200px 120px;
+            animation: wave 15s linear infinite;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        @keyframes wave {
+            0% { background-position: 0 0; }
+            100% { background-position: 1200px 0; }
+        }
+
+        /* PARTÍCULAS FLOTANTES */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(29, 158, 117, 0.3), transparent);
+            animation: float-particle linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+
         /* ESTADÍSTICAS */
         .stats {
             display: grid;
@@ -461,9 +566,219 @@
             flex-wrap: wrap;
         }
 
-        .technique-btn {
-            flex: 1;
-            min-width: 150px;
+        /* SECCIÓN SPOTIFY */
+        .spotify-section {
+            background: linear-gradient(135deg, rgba(29, 185, 84, 0.12) 0%, rgba(30, 215, 96, 0.08) 100%);
+            border: 1px solid rgba(29, 185, 84, 0.3);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-top: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .spotify-desc {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .spotify-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, rgba(29, 185, 84, 0.3) 0%, rgba(29, 185, 84, 0.2) 100%);
+            border: 1.5px solid rgba(29, 185, 84, 0.6);
+            border-radius: 10px;
+            color: #1DB954;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .spotify-btn:hover {
+            border-color: #1DB954;
+            background: linear-gradient(135deg, rgba(29, 185, 84, 0.5) 0%, rgba(29, 185, 84, 0.35) 100%);
+            box-shadow: 0 0 20px rgba(29, 185, 84, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Ajustar iframe de Spotify */
+        iframe {
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* BOTÓN DE MINDFULNESS DEBAJO */
+        .mindfulness-btn {
+            width: 100%;
+            padding: 14px 28px;
+            margin-top: 1.5rem;
+            border: 1.5px solid rgba(168, 85, 247, 0.4);
+            background: rgba(168, 85, 247, 0.1);
+            border-radius: 12px;
+            color: rgba(168, 85, 247, 0.9);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+        }
+
+        .mindfulness-btn:hover {
+            border-color: rgba(168, 85, 247, 0.8);
+            background: rgba(168, 85, 247, 0.2);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .mindfulness-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .mindfulness-modal.hidden {
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .mindfulness-content {
+            background: rgba(20, 25, 45, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 100%;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .close-btn:hover {
+            background: rgba(168, 85, 247, 0.3);
+            border-color: rgba(168, 85, 247, 0.6);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .mindfulness-content h2 {
+            font-size: 24px;
+            color: rgba(168, 85, 247, 0.9);
+            margin-bottom: 0.8rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .mindfulness-intro {
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .question-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .question {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(74, 144, 226, 0.08) 100%);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .question:hover {
+            border-color: rgba(168, 85, 247, 0.6);
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2) 0%, rgba(74, 144, 226, 0.12) 100%);
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(168, 85, 247, 0.2);
+        }
+
+        .q-number {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.6), rgba(74, 144, 226, 0.6));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        .q-text {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14px;
+            line-height: 1.6;
+            font-weight: 300;
         }
 
         /* SECCIÓN INFO */
@@ -593,8 +908,11 @@
                 <span class="phase-main" id="phase">Inhala</span>
                 <span class="phase-text" id="phase-desc">por 4 segundos</span>
                 <span class="timer" id="timer">0</span>
+                <span class="affirmation">Todo pasa</span>
             </div>
         </div>
+
+        <div class="inspirational-quote" id="quote">Estás exactamente donde necesitas estar</div>
 
         <div class="stats">
             <div class="stat-card">
@@ -622,6 +940,81 @@
             <button id="tech48" class="technique-btn active">🔄 4-7-8</button>
             <button id="tech55" class="technique-btn">⚡ 5-5</button>
             <button id="tech44" class="technique-btn">✨ Box 4-4</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="spotify-section">
+            <p class="spotify-desc">Escucha tu playlist mientras respiras</p>
+            
+            <iframe style="border-radius:12px; margin-bottom: 1rem;" 
+                src="https://open.spotify.com/embed/playlist/1xylxtRr8iGFnasKNmvrl7?utm_source=generator" 
+                width="100%" 
+                height="80" 
+                frameBorder="0" 
+                allowfullscreen="" 
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                loading="lazy">
+            </iframe>
+            
+            <a href="https://open.spotify.com/playlist/1xylxtRr8iGFnasKNmvrl7?si=b704044292b14eea" 
+               target="_blank" 
+               class="spotify-btn">
+                Abrir
+            </a>
+        </div>
+
+        <button id="mindfulnessBtn" class="mindfulness-btn">🧠 Preguntas de Conciencia</button>
+
+        <div id="mindfulnessModal" class="mindfulness-modal hidden">
+            <div class="mindfulness-content">
+                <button id="closeMindfulness" class="close-btn">✕</button>
+                <h2>Vuelve al Presente</h2>
+                <p class="mindfulness-intro">Responde con sinceridad. No hay respuestas correctas.</p>
+                
+                <div class="question-container">
+                    <div class="question" id="question1">
+                        <p class="q-number">1</p>
+                        <p class="q-text">¿Dónde está tu cuerpo ahora? ¿Qué sientes?</p>
+                    </div>
+                    <div class="question" id="question2">
+                        <p class="q-number">2</p>
+                        <p class="q-text">¿Qué olores hay a tu alrededor? ¿Cuál te trae paz?</p>
+                    </div>
+                    <div class="question" id="question3">
+                        <p class="q-number">3</p>
+                        <p class="q-text">¿En qué espacio físico estás? Describe lo que ves.</p>
+                    </div>
+                    <div class="question" id="question4">
+                        <p class="q-number">4</p>
+                        <p class="q-text">¿Qué sonidos escuchas en este momento?</p>
+                    </div>
+                    <div class="question" id="question5">
+                        <p class="q-number">5</p>
+                        <p class="q-text">¿Cuál es la temperatura de tu piel? ¿Y tu entorno?</p>
+                    </div>
+                    <div class="question" id="question6">
+                        <p class="q-number">6</p>
+                        <p class="q-text">¿Qué textura tocas ahora? (ropa, aire, piso)</p>
+                    </div>
+                    <div class="question" id="question7">
+                        <p class="q-number">7</p>
+                        <p class="q-text">¿Qué emoción sientes en este momento?</p>
+                    </div>
+                    <div class="question" id="question8">
+                        <p class="q-number">8</p>
+                        <p class="q-text">¿Cuál fue el pensamiento que más te visitó hoy?</p>
+                    </div>
+                    <div class="question" id="question9">
+                        <p class="q-number">9</p>
+                        <p class="q-text">¿Qué necesitas soltar en este momento?</p>
+                    </div>
+                    <div class="question" id="question10">
+                        <p class="q-number">10</p>
+                        <p class="q-text">¿Dónde está tu peso corporal? ¿Te sientes anclado?</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="info-section">
@@ -668,14 +1061,11 @@
         function updateBreathingAnimation() {
             const totalTime = technique.inhale + technique.hold + technique.exhale + 1;
             const breathingCircle = document.querySelector('.breathing-circle');
-            
-            // Cambiar solo la duración de la animación
             breathingCircle.style.animationDuration = totalTime + 's';
-            
-            // Actualizar también el pulso del borde
-            const breathingArea = document.querySelector('.breathing-area');
-            breathingArea.style.setProperty('--animation-duration', totalTime + 's');
         }
+
+        // ========== AUDIO ==========
+        function initAudio() {
             if (!audioContext) {
                 audioContext = new (window.AudioContext || window.webkitAudioContext)();
             }
@@ -693,16 +1083,18 @@
                 oscillator = audioContext.createOscillator();
                 gainNode = audioContext.createGain();
 
-                oscillator.frequency.value = 174;
+                // Sonido bajo y tranquilo (136 Hz - Frecuencia Schumann)
+                oscillator.frequency.value = 136;
                 oscillator.type = 'sine';
 
-                gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.6);
+                // Volumen audible pero suave (mucho mejor que antes)
+                gainNode.gain.setValueAtTime(0.12, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.002, audioContext.currentTime + 1);
 
                 oscillator.connect(gainNode);
                 gainNode.connect(audioContext.destination);
                 oscillator.start();
-                oscillator.stop(audioContext.currentTime + 0.6);
+                oscillator.stop(audioContext.currentTime + 1);
             } catch (e) {
                 console.log('Audio no disponible');
             }
@@ -838,6 +1230,88 @@
             soundEnabled = !soundEnabled;
             elements.soundToggle.textContent = soundEnabled ? '🔊' : '🔇';
         });
+
+        // MODAL DE MINDFULNESS
+        const mindfulnessBtn = document.getElementById('mindfulnessBtn');
+        const mindfulnessModal = document.getElementById('mindfulnessModal');
+        const closeMindfulness = document.getElementById('closeMindfulness');
+
+        mindfulnessBtn.addEventListener('click', () => {
+            mindfulnessModal.classList.remove('hidden');
+        });
+
+        closeMindfulness.addEventListener('click', () => {
+            mindfulnessModal.classList.add('hidden');
+        });
+
+        // Cerrar modal al hacer click afuera
+        mindfulnessModal.addEventListener('click', (e) => {
+            if (e.target === mindfulnessModal) {
+                mindfulnessModal.classList.add('hidden');
+            }
+        });
+
+        // FRASES INSPIRACIONALES
+        const quotes = [
+            "Estás exactamente donde necesitas estar",
+            "Este momento es tu vida",
+            "La calma es tu derecho natural",
+            "Respira profundo, todo está bien",
+            "Eres más fuerte de lo que crees",
+            "La paz comienza contigo",
+            "Soltar es un acto de amor propio",
+            "Cada respiración es un nuevo comienzo",
+            "Tu cuerpo sabe sanar",
+            "Estoy seguro aquí y ahora",
+            "No eres responsable de todo",
+            "Suelta lo que no puedes controlar",
+            "No tienes que arreglarlo todo hoy",
+            "Tu responsabilidad termina aquí",
+            "No todo depende de ti",
+            "Está bien no poder con todo",
+            "Otros también tienen responsabilidad",
+            "Hacer lo mejor es suficiente",
+            "Puedes soltar sin culpa",
+            "No eres responsable de los sentimientos ajenos"
+        ];
+
+        let quoteIndex = 0;
+        function changeQuote() {
+            const quoteElement = document.getElementById('quote');
+            quoteElement.textContent = quotes[quoteIndex];
+            quoteIndex = (quoteIndex + 1) % quotes.length;
+        }
+
+        // Cambiar frase cada 8 segundos
+        setInterval(changeQuote, 8000);
+
+        // CREAR PARTÍCULAS FLOTANTES
+        function createParticles() {
+            const particleCount = 5;
+            for (let i = 0; i < particleCount; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    
+                    const size = Math.random() * 30 + 20; // 20-50px
+                    particle.style.width = size + 'px';
+                    particle.style.height = size + 'px';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.bottom = '-100px';
+                    particle.style.animationDuration = (Math.random() * 8 + 12) + 's'; // 12-20s
+                    particle.style.animationDelay = (Math.random() * 2) + 's';
+                    
+                    document.body.appendChild(particle);
+                    
+                    // Remover después de la animación
+                    setTimeout(() => particle.remove(), 20000);
+                }, i * 1000);
+            }
+        }
+
+        // Crear partículas continuamente
+        setInterval(createParticles, 6000);
+        createParticles(); // Iniciar inmediatamente
 
         // Inicialización
         updatePhaseDisplay();
